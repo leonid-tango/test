@@ -14,47 +14,6 @@ use Core\ConnectDb;
 
 class UserModel
 {
-/*    private $dbname = 'test_app';
-
-    private $host = 'localhost';
-
-    private $user  = 'root';
-
-    private $pass = '';
-
-
-
-    public function getDbName()
-    {
-        return $this->dbname;
-    }
-
-    public function getHst()
-    {
-        return $this->host;
-    }
-
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    public function getPass()
-    {
-        return $this->pass;
-    }
-
-    public function Connect()
-    {
-        try {
-            $db = new \PDO('mysql:dbname=test_app;host=localhost', $this->user, $this->pass);
-        } catch (\PDOException $e) {
-            print "<h1> Error: " . $e->getMessage() . "</h1>";
-            die();
-        }
-        return $db;
-    }*/
-
 
     /**
      * @param array $data
