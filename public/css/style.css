@@ -1,0 +1,13 @@
+body {
+    margin-top: 10%;
+}
+
+
+
+/*helpers*/
+.helpers {
+    height: 20px;
+}
+.helper-text {
+    display: none;
+}
