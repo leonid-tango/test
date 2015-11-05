@@ -20,7 +20,6 @@ class UserController implements User
 
     public function loginAction($post)
     {
-//        var_dump($post);
         // TODO: Implement loginAction() method.
 
         $email = self::cleanEmail($post['user_email']);

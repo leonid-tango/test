@@ -21,7 +21,6 @@ class UserModel
     public function setUser($data = array())
     {
         $connect = new ConnectDb();
-//        $set = $this->Connect();
         $set = $connect->Connect();
         $query = $set->prepare('INSERT INTO user(email, password, created_at) VALUES (?, ? , ?)');
         $query->bindParam(1, $data['email']);

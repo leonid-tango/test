@@ -43,10 +43,9 @@ class ConnectDb
         try {
             $db = new \PDO('mysql:dbname=test_app;host=localhost', $this->user, $this->pass);
         } catch (\PDOException $e) {
-            print "<h1> Error: " . $e->getMessage() . "</h1>";
+            print "<h1>Mysql Error: " . $e->getMessage() . "</h1>";
             die();
         }
-        var_dump($db);
         return $db;
     }
 }
