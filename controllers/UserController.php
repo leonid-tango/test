@@ -18,23 +18,36 @@ use models\UserModel;
 class UserController implements User
 {
 
-    public function loginAction($post)
+    /**
+     * @param $post
+     * @return array|int
+     */
+    public function loginAction(array $post)
     {
-        // TODO: Implement loginAction() method.
-
-        $email = self::cleanEmail($post['user_email']);
-        $password = self::cleanPassword($post['user_password']);
-
-
         $user  = new UserModel();
 
-        $user->setUser(['email' => $email, 'password' =>$password]);
+        $email = self::prepareEmail($post['user_email']);
+        $password = self::preparePassword($post['user_password']);
+
+        $loggedUser = $user->getUser(['email' => $email,'password' => $password]);
+
+        if (empty($loggedUser)) {
+            return false;
+        }
+            return $loggedUser;
     }
 
-    public function registerAction($email, $password, $repeatPassword)
+    public function registerAction(array $post)
     {
-        // TODO: Implement registerAction() method.
-        $this->CheckPasswords($password, $repeatPassword);
+        var_dump($post);
+        $user = new UserModel();
+
+        $this->CheckPasswords($post['password'], $post['repeat_password']);
+
+        $email = self::prepareEmail($post['user_email']);
+        $password = self::preparePassword($post['user_password']);
+
+        $user->setUser(['email' => $email, 'password' =>$password]);
     }
 
     public function logoutAction()
@@ -42,12 +55,12 @@ class UserController implements User
         // TODO: Implement logoutAction() method.
     }
 
-    private function cleanEmail($email)
+    private function prepareEmail($email)
     {
         return $email;
     }
 
-    private function cleanPassword($password)
+    private function preparePassword($password)
     {
         return $password;
     }

@@ -9,9 +9,9 @@ namespace controllers;
 
 interface User
 {
-    public function loginAction($post);
+    public function loginAction(array $post);
 
-    public function registerAction($email, $password, $repeatPassword);
+    public function registerAction(array $post);
 
     public function logoutAction();
 }

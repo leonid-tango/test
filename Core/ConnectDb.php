@@ -16,28 +16,25 @@ class ConnectDb
 
     private $pass = '';
 
-
-
-    public function getDbName()
-    {
-        return $this->dbname;
-    }
-
-    public function getHst()
-    {
-        return $this->host;
-    }
-
+    /**
+     * @return string
+     */
     public function getUser()
     {
         return $this->user;
     }
 
+    /**
+     * @return string
+     */
     public function getPass()
     {
         return $this->pass;
     }
 
+    /**
+     * @return \PDO
+     */
     public function Connect()
     {
         try {
