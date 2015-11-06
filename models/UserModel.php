@@ -22,7 +22,7 @@ class UserModel
     {
         $connect = new ConnectDb();
         $set = $connect->Connect();
-        $query = $set->prepare('INSERT INTO user(email, password, created_at)
+        $query = $set->prepare('INSERT INTO users(email, password, created_at)
                                 VALUES (?, ? , ?)');
 
         $query->bindParam(1, $data['email']);
@@ -31,7 +31,6 @@ class UserModel
 
         $query->execute();
 
-//        $set = null;
     }
 
 
@@ -46,15 +45,14 @@ class UserModel
         $connect = new ConnectDb();
         $get = $connect->Connect();
         $query = $get->prepare('SELECT email, password
-                                FROM `user`
+                                FROM `users`
                                 WHERE `password` = :pass AND `email` = :email');
 
         $query->bindParam(':pass', $data['password']);
-        $query->bindParam(':email', $data['email'], \PDO::PARAM_STR);
+        $query->bindParam(':email', $data['email']);
         $query->execute();
 
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
-
         return $result;
     }
 

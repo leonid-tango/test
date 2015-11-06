@@ -27,7 +27,7 @@ class UserController implements User
         $user  = new UserModel();
 
         $email = self::prepareEmail($post['user_email']);
-        $password = self::preparePassword($post['user_password']);
+        $password = self::preparePassword($post['user_password'], $email);
 
         $loggedUser = $user->getUser(['email' => $email,'password' => $password]);
 
@@ -37,36 +37,68 @@ class UserController implements User
             return $loggedUser;
     }
 
+    /**
+     * @param array $post
+     * @return array|bool
+     */
     public function registerAction(array $post)
     {
         var_dump($post);
         $user = new UserModel();
 
-        $this->CheckPasswords($post['password'], $post['repeat_password']);
+        if (isset($post['repeat_password'])) {
+            if (! $this->CheckPasswords($post['user_password'], $post['repeat_password'])) {
+                return false;
+            }
+        }
 
         $email = self::prepareEmail($post['user_email']);
-        $password = self::preparePassword($post['user_password']);
+        $password = self::preparePassword($post['user_password'], $email);
 
         $user->setUser(['email' => $email, 'password' =>$password]);
+
+
+        $registeredUser = $user->getUser(['email' => $email, 'password' => $password]);
+        return $registeredUser;
     }
 
+    /**
+     *
+     */
     public function logoutAction()
     {
         // TODO: Implement logoutAction() method.
     }
 
+    /**
+     * @param $email
+     * @return string
+     */
     private function prepareEmail($email)
     {
-        return $email;
+        return crypt($email, '$6$rounds=10$TestCryptSalt$');
     }
 
-    private function preparePassword($password)
+    /**
+     * @param $password
+     * @param $salt
+     * @return mixed
+     */
+    private function preparePassword($password, $salt)
     {
-        return $password;
+        return crypt($password, '$6$rounds=10' . $salt . '$');
     }
 
+    /**
+     * @param $password
+     * @param $repeatPassword
+     * @return bool
+     */
     private function CheckPasswords($password, $repeatPassword)
     {
-        return true;// dummy return, will return true or false if password is not identical
+        if ($password !== $repeatPassword) {
+            return false;
+        }
+        return true;
     }
 }
