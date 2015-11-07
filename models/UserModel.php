@@ -55,7 +55,7 @@ class UserModel
         $query->execute();
 
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
-        var_dump($result);
+
         return $result;
     }
 

@@ -1,4 +1,4 @@
-<?php include_once 'templates/header.php'; ?>
+<?php include_once 'views/templates/header.php'; ?>
 <?php session_start(); ?>
 <div class="container-fluid">
     <h1 class="text-center">Hello User</h1>
@@ -16,4 +16,4 @@
 </div>
 
 
-<?php include_once 'templates/footer.php'?>
+<?php include_once 'views/templates/footer.php' ?>

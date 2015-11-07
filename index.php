@@ -15,14 +15,14 @@ if ($_POST) {
         $user = $getUser->registerAction($_POST);
     }
 }
-include_once 'views/login.php';
+include_once './login.php';
 
 if ($user) {
     $user = $user[0];
 
     $_SESSION['email'] = $user['email'];
     $_SESSION['user_name'] = $user['user_name'];
-    header('Location:views/greating.php ');
+    header('Location:./greating.php ');
 } else {
 }
 

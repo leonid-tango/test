@@ -1,4 +1,4 @@
-<?php include_once 'templates/header.php'; ?>
+<?php include_once 'views/templates/header.php'; ?>
 
 <div class="container-fluid">
 <div class="col-md-4 col-md-offset-4">
@@ -38,4 +38,4 @@
     </form>
 </div>
 </div>
-<?php include_once 'templates/footer.php'?>
+<?php include_once 'views/templates/footer.php' ?>
