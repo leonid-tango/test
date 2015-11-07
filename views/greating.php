@@ -2,7 +2,7 @@
 <?php session_start(); ?>
 <div class="container-fluid">
     <h1 class="text-center">Hello User</h1>
-    <p class="text-center">You are logged with email: "<?= $_SESSION['email'] ?>"</p>
+    <p class="text-center">You are logged as: <strong><?= $_SESSION['user_name'] ?></strong></p>
 
     <div class="row">
     <div class="col-md-4 col-md-offset-4">

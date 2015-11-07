@@ -6,6 +6,10 @@
 
     <form action="<?= $_SERVER['PHP_SELF']?>" method="post" class="login-form">
         <div class="form-group">
+            <label for="user_name" class="sr-only">Name</label>
+            <input type="tel" name="user_name" id="user_name" class="form-control" placeholder="name" required="required">
+        </div>
+        <div class="form-group">
             <div class="helpers">
                 <span class="helper-text">Email is invalid... try again</span>
             </div>

@@ -22,12 +22,13 @@ class UserModel
     {
         $connect = new ConnectDb();
         $set = $connect->Connect();
-        $query = $set->prepare('INSERT INTO users(email, password, created_at)
-                                VALUES (?, ? , ?)');
+        $query = $set->prepare('INSERT INTO users(email, password, user_name , created_at)
+                                VALUES (?, ? , ?, ?)');
 
         $query->bindParam(1, $data['email']);
         $query->bindParam(2, $data['password']);
-        $query->bindParam(3, date('Y-m-d H:i:s'));
+        $query->bindParam(3, $data['user_name']);
+        $query->bindParam(4, date('Y-m-d H:i:s'));
 
         $query->execute();
 
@@ -42,9 +43,10 @@ class UserModel
      */
     public function getUser(array $data)
     {
+
         $connect = new ConnectDb();
         $get = $connect->Connect();
-        $query = $get->prepare('SELECT email, password
+        $query = $get->prepare('SELECT *
                                 FROM `users`
                                 WHERE `password` = :pass AND `email` = :email');
 
@@ -53,6 +55,7 @@ class UserModel
         $query->execute();
 
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+        var_dump($result);
         return $result;
     }
 

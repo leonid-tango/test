@@ -21,7 +21,7 @@ if ($user) {
     $user = $user[0];
 
     $_SESSION['email'] = $user['email'];
-    $_SESSION['pass'] = $user['password'];
+    $_SESSION['user_name'] = $user['user_name'];
     header('Location:views/greating.php ');
 } else {
 }

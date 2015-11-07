@@ -43,7 +43,6 @@ class UserController implements User
      */
     public function registerAction(array $post)
     {
-        var_dump($post);
         $user = new UserModel();
 
         if (isset($post['repeat_password'])) {
@@ -55,7 +54,7 @@ class UserController implements User
         $email = self::prepareEmail($post['user_email']);
         $password = self::preparePassword($post['user_password'], $email);
 
-        $user->setUser(['email' => $email, 'password' =>$password]);
+        $user->setUser(['email' => $email, 'password' =>$password, 'user_name' => $post['user_name']]);
 
 
         $registeredUser = $user->getUser(['email' => $email, 'password' => $password]);
