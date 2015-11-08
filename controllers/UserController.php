@@ -10,10 +10,10 @@ namespace controllers;
 
 require_once "UserInterface.php";
 require_once "models/UserModel.php";
-
+require_once "Core/Session.php";
 use models\UserModel;
 
-
+use Core\Session;
 
 class UserController implements User
 {
@@ -25,6 +25,7 @@ class UserController implements User
     public function loginAction(array $post)
     {
         $user  = new UserModel();
+        $session = new Session();
 
         $email = self::prepareEmail($post['user_email']);
         $password = self::preparePassword($post['user_password'], $email);
@@ -32,7 +33,9 @@ class UserController implements User
         $loggedUser = $user->getUser(['email' => $email,'password' => $password]);
 
         if (empty($loggedUser)) {
-            return false;
+
+
+            return $session->createSession('loginSes', ['success' => false,'message' => 'no data']);
         }
             return $loggedUser;
     }
@@ -44,10 +47,10 @@ class UserController implements User
     public function registerAction(array $post)
     {
         $user = new UserModel();
-
+        $session = new Session();
         if (isset($post['repeat_password'])) {
             if (! $this->CheckPasswords($post['user_password'], $post['repeat_password'])) {
-                return false;
+                return $session->createSession('createSes', ['success' => false, 'message' => 'password not equal']);
             }
         }
 

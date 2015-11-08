@@ -6,11 +6,9 @@
 
     <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" class="login-form">
         <div class="button-group">
-            <button class="btn btn-block btn-primary btn-lg" name="logout">Logout</button>
+            <a href="logout.php" class="btn btn-block btn-primary btn-lg" name="logout">Logout</a>
         </div>
-    </form>
     </div>
     </div>
 </div>

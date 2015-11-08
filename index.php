@@ -18,6 +18,8 @@ if ($_POST) {
 include_once './login.php';
 
 if ($user) {
+    var_dump($_SESSION);
+    die();
     $user = $user[0];
 
     $_SESSION['email'] = $user['email'];
