@@ -1,3 +1,2 @@
 # test
-test project
-need to standartize database name
+test project constructed with use of classes, namespaces and othe good things in php. 
