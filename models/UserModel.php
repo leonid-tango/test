@@ -39,8 +39,6 @@ class UserModel
     /**
      * @param array $data
      * @return array|int
-     * @internal param $password
-     * @internal param array $data
      */
     public function getUser(array $data)
     {

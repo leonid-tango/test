@@ -1,5 +1,11 @@
 <?php include_once 'views/templates/header.php'; ?>
 <?php session_start(); ?>
+<?php
+if (!$_SESSION['user_name'] && !$_SESSION['email']) {
+    $_SESSION['errors']['not_logged'] = 'login please';
+    header('Location:./index.php');
+}
+?>
 <div class="container-fluid">
     <h1 class="text-center">Hello User</h1>
     <p class="text-center">You are logged as: <strong><?= $_SESSION['user_name'] ?></strong></p>

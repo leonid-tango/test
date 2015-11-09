@@ -28,18 +28,21 @@ class UserController implements User
     {
         $user  = new UserModel();
         $session = new Session();
+        $handleErrors = new ExceptionHandler();
+
+        $userErrors = $handleErrors->notEnoughData($post);
+
+        if (!empty($userErrors)) {
+         return $session->createSession('errors', $userErrors);
+        }
 
         $email = self::prepareEmail($post['user_email']);
         $password = self::preparePassword($post['user_password'], $email);
 
-       /* if (!$email || !$password) {
-            return $session->createSession('loginSes', ['success' => false,'message' => 'no data']);
-        }*/
-
         $loggedUser = $user->getUser(['email' => $email,'password' => $password]);
 
         if (empty($loggedUser)) {
-            return $session->createSession('loginSes', ['success' => false,'message' => 'no data']);
+            return $loggedUser = false;
         }
             return $loggedUser;
     }
@@ -54,7 +57,7 @@ class UserController implements User
         $session = new Session();
         if (isset($post['repeat_password'])) {
             if (!$this->CheckPasswords($post['user_password'], $post['repeat_password'])) {
-                 return $session->createSession('createSes', ['success' => false, 'message' => 'password not equal']);
+                 return $session->createSession('errors', ['success' => false, 'message' => 'password not equal']);
             }
         }
 

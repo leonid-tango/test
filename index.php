@@ -10,6 +10,9 @@ use Core\Session;
     $session = new Session();
 
 if ($_POST) {
+    if($_SESSION['errors']){
+        $session->sessionDestroy();
+    }
     if (isset($_POST['login'])) {
         $user = $getUser->loginAction($_POST);
     }else {
@@ -18,17 +21,11 @@ if ($_POST) {
 }
 include_once './login.php';
 
-if ($user) {
-    var_dump($_SESSION);
-
-    if ($_SESSION['loginSes']['success'] == false && !$_SESSION['regSes']['success'] == false) {
-        header('Location:./index.php');
-    } elseif ($_SESSION['regSes']['success'] == true) {
+if ($user && !$user['errors']) {
         $user = $user[0];
         $session->createSession('email', $user['email']);
         $session->createSession('user_name', $user['user_name']);
         header('Location:./greating.php ');
-    }
 } else {
 }
 

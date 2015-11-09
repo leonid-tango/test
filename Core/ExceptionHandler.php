@@ -17,13 +17,22 @@ class ExceptionHandler
         return 'not found user ' . $userName;
     }
 
-    public function notEnoughData($data)
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function notEnoughData(array $data)
     {
-        $notEmpty =  true;
-            if (!$data) {
-                $notEmpty = false;
+        $userErrors =[];
+        foreach ($data as $key => $value ) {
+            if (!$value) {
+                if ($key == 'repeat_password') {
+                    continue;
+                }
+                $userErrors[$key] = preg_replace("(_)"," ", $key);
+            }
         }
-        return $notEmpty;
+        return $userErrors;
     }
 
 
