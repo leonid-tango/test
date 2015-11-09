@@ -20,6 +20,7 @@ class UserModel
      */
     public function setUser($data = array())
     {
+        var_dump($data);
         $connect = new ConnectDb();
         $set = $connect->Connect();
         $query = $set->prepare('INSERT INTO users(email, password, user_name , created_at)

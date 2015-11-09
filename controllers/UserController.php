@@ -11,9 +11,11 @@ namespace controllers;
 require_once "UserInterface.php";
 require_once "models/UserModel.php";
 require_once "Core/Session.php";
-use models\UserModel;
+require_once "Core/ExceptionHandler.php";
 
+use models\UserModel;
 use Core\Session;
+use Core\ExceptionHandler;
 
 class UserController implements User
 {
@@ -30,11 +32,13 @@ class UserController implements User
         $email = self::prepareEmail($post['user_email']);
         $password = self::preparePassword($post['user_password'], $email);
 
+       /* if (!$email || !$password) {
+            return $session->createSession('loginSes', ['success' => false,'message' => 'no data']);
+        }*/
+
         $loggedUser = $user->getUser(['email' => $email,'password' => $password]);
 
         if (empty($loggedUser)) {
-
-
             return $session->createSession('loginSes', ['success' => false,'message' => 'no data']);
         }
             return $loggedUser;
@@ -49,8 +53,8 @@ class UserController implements User
         $user = new UserModel();
         $session = new Session();
         if (isset($post['repeat_password'])) {
-            if (! $this->CheckPasswords($post['user_password'], $post['repeat_password'])) {
-                return $session->createSession('createSes', ['success' => false, 'message' => 'password not equal']);
+            if (!$this->CheckPasswords($post['user_password'], $post['repeat_password'])) {
+                 return $session->createSession('createSes', ['success' => false, 'message' => 'password not equal']);
             }
         }
 
@@ -59,8 +63,10 @@ class UserController implements User
 
         $user->setUser(['email' => $email, 'password' =>$password, 'user_name' => $post['user_name']]);
 
-
         $registeredUser = $user->getUser(['email' => $email, 'password' => $password]);
+        if ($registeredUser) {
+            $session->createSession('regSes', ['success' => true, 'message' => 'registered successful']);
+        }
         return $registeredUser;
     }
 
