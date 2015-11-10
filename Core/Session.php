@@ -19,11 +19,19 @@ class Session
         }
     }
 
+    /**
+     * @return bool
+     */
     public function sessionStart()
     {
-        session_start();
+         return session_start();
     }
 
+    /**
+     * @param $sessionName
+     * @param $data
+     * @return mixed
+     */
     public function createSession($sessionName, $data)
     {
         if (!isset($_SESSION[$sessionName])) {
@@ -32,6 +40,9 @@ class Session
         return $_SESSION;
     }
 
+    /**
+     * clear all session data
+     */
     public function sessionDestroy()
     {
         session_destroy();

@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
 <div class="col-md-4 col-md-offset-4">
-    <h3 class="text-center text-danger"><?= isset($_SESSION['errors']['not_logged']) ? $_SESSION['errors']['not_logged'] : '' ?></h3>
+    <h3 class="text-center text-danger"><?= isset($_SESSION['errors']['notAllowed']) ? $_SESSION['errors']['notAllowed'] : '' ?></h3>
     <h2 class="text-center">hello</h2>
 
     <form action="<?= $_SERVER['PHP_SELF']?>" method="post" class="login-form">

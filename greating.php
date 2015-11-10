@@ -1,8 +1,14 @@
-<?php include_once 'views/templates/header.php'; ?>
-<?php session_start(); ?>
 <?php
+include_once 'views/templates/header.php';
+require_once 'Core/Session.php';
+
+use Core\Session;
+
+$session = new Session();
+
 if (!$_SESSION['user_name'] && !$_SESSION['email']) {
-    $_SESSION['errors']['not_logged'] = 'login please';
+    $session->createSession('errors',['notAllowed' => 'Login, please']);
+//    $_SESSION['errors']['not_logged'] = 'login please';
     header('Location:./index.php');
 }
 ?>

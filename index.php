@@ -10,12 +10,11 @@ use Core\Session;
     $session = new Session();
 
 if ($_POST) {
-    if($_SESSION['errors']){
-        $session->sessionDestroy();
-    }
     if (isset($_POST['login'])) {
+        session_unset();
         $user = $getUser->loginAction($_POST);
     }else {
+        session_unset();
         $user = $getUser->registerAction($_POST);
     }
 }
